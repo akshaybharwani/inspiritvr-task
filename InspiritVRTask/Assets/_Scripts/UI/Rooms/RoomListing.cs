@@ -1,32 +1,49 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using TMPro;
-using UnityEngine;
+using System.Security.Cryptography;
+using Photon.Pun;
 using Photon.Realtime;
+using UnityEngine;
 
-public class RoomListing : MonoBehaviour
+public class RoomListing : MonoBehaviourPunCallbacks
 {
-    #region Public Variables
-
-    public RoomInfo RoomInfo { get; private set; }
-
-    #endregion
-    
     #region Private Variables
 
     [SerializeField] 
-    private TextMeshProUGUI roomListingText;
-
-    public RoomListing(RoomInfo roomInfo)
-    {
-        RoomInfo = roomInfo;
-    }
+    private Transform roomListingParent;
+    
+    [SerializeField]
+    private RoomListingMenu roomListingPrefab;
+    
+    private List<RoomListingMenu> _listings = new List<RoomListingMenu>();
 
     #endregion
 
-    public void SetRoomInfo(RoomInfo roomInfo)
+    public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
-        RoomInfo = roomInfo;
-        roomListingText.text = roomInfo.Name + ", " + roomInfo.MaxPlayers;
+        foreach (var roomInfo in roomList)
+        {
+            if (roomInfo.RemovedFromList)
+            {
+                int index = _listings.FindIndex(x => x.RoomInfo.Name == roomInfo.Name);
+
+                if (index != -1)
+                {
+                    Destroy(_listings[index].gameObject);
+                    _listings.RemoveAt(index);
+                }
+            }
+            else
+            {
+                RoomListingMenu roomListing = Instantiate(roomListingPrefab, roomListingParent);
+
+                if (roomListing)
+                {
+                    roomListing.SetRoomInfo(roomInfo);
+                    _listings.Add(roomListing);
+                }
+            }
+            
+        }
     }
 }
