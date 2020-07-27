@@ -1,10 +1,13 @@
 ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
+    - GameManager
     - PhotonManager
+    - QuestionsManager
     PhotonUnityNetworking.Demos.dll:
     - Photon.Pun.Demo.Asteroids.Asteroid
     - Photon.Pun.Demo.Asteroids.Bullet
+    - Photon.Pun.Demo.Asteroids.PlayerOverviewPanel
     - Photon.Pun.Demo.Asteroids.RoomListEntry
     - Photon.Pun.Demo.Asteroids.Spaceship
     - Photon.Pun.Demo.PunBasics.CameraWork
@@ -15,6 +18,7 @@ ScriptsOnlyBuild:
     - Photon.Pun.Demo.SlotRacer.Utils.SplineWalker
     - PlayerListEntry
     PhotonUnityNetworking.Utilities.dll:
+    - Photon.Pun.UtilityScripts.CountdownTimer
     - Photon.Pun.UtilityScripts.EventSystemSpawner
     - Photon.Pun.UtilityScripts.PlayerNumbering
     - Photon.Pun.UtilityScripts.TextButtonTransition
@@ -59,6 +63,55 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.Text
     - UnityEngine.UI.VerticalLayoutGroup
   sceneClasses:
+    Assets/_Scenes/GameView.unity:
+    - Class: 1
+      Script: {instanceID: 0}
+    - Class: 4
+      Script: {instanceID: 0}
+    - Class: 20
+      Script: {instanceID: 0}
+    - Class: 21
+      Script: {instanceID: 0}
+    - Class: 28
+      Script: {instanceID: 0}
+    - Class: 48
+      Script: {instanceID: 0}
+    - Class: 81
+      Script: {instanceID: 0}
+    - Class: 104
+      Script: {instanceID: 0}
+    - Class: 108
+      Script: {instanceID: 0}
+    - Class: 114
+      Script: {instanceID: 11170}
+    - Class: 114
+      Script: {instanceID: 11176}
+    - Class: 114
+      Script: {instanceID: 11204}
+    - Class: 114
+      Script: {instanceID: 11516}
+    - Class: 114
+      Script: {instanceID: 12198}
+    - Class: 114
+      Script: {instanceID: 13010}
+    - Class: 114
+      Script: {instanceID: 13516}
+    - Class: 114
+      Script: {instanceID: 16124}
+    - Class: 115
+      Script: {instanceID: 0}
+    - Class: 128
+      Script: {instanceID: 0}
+    - Class: 157
+      Script: {instanceID: 0}
+    - Class: 196
+      Script: {instanceID: 0}
+    - Class: 222
+      Script: {instanceID: 0}
+    - Class: 223
+      Script: {instanceID: 0}
+    - Class: 224
+      Script: {instanceID: 0}
     Assets/_Scenes/LobbyView.unity:
     - Class: 1
       Script: {instanceID: 0}
@@ -115,67 +168,69 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11204}
     - Class: 114
-      Script: {instanceID: 11348}
+      Script: {instanceID: 11352}
     - Class: 114
-      Script: {instanceID: 11370}
+      Script: {instanceID: 11374}
     - Class: 114
-      Script: {instanceID: 11408}
+      Script: {instanceID: 11412}
     - Class: 114
-      Script: {instanceID: 11508}
+      Script: {instanceID: 11516}
     - Class: 114
-      Script: {instanceID: 11588}
+      Script: {instanceID: 11598}
     - Class: 114
-      Script: {instanceID: 11814}
+      Script: {instanceID: 11826}
     - Class: 114
-      Script: {instanceID: 11958}
+      Script: {instanceID: 11862}
     - Class: 114
-      Script: {instanceID: 11998}
+      Script: {instanceID: 11976}
     - Class: 114
-      Script: {instanceID: 12204}
+      Script: {instanceID: 12020}
     - Class: 114
-      Script: {instanceID: 12268}
+      Script: {instanceID: 12230}
     - Class: 114
-      Script: {instanceID: 12456}
+      Script: {instanceID: 12294}
     - Class: 114
-      Script: {instanceID: 12496}
+      Script: {instanceID: 12486}
     - Class: 114
-      Script: {instanceID: 12516}
+      Script: {instanceID: 12530}
     - Class: 114
-      Script: {instanceID: 12528}
+      Script: {instanceID: 12550}
     - Class: 114
-      Script: {instanceID: 12608}
+      Script: {instanceID: 12564}
     - Class: 114
-      Script: {instanceID: 12618}
+      Script: {instanceID: 12646}
     - Class: 114
-      Script: {instanceID: 12630}
+      Script: {instanceID: 12658}
     - Class: 114
-      Script: {instanceID: 12660}
+      Script: {instanceID: 12670}
     - Class: 114
-      Script: {instanceID: 12664}
+      Script: {instanceID: 12700}
     - Class: 114
-      Script: {instanceID: 12680}
+      Script: {instanceID: 12704}
     - Class: 114
-      Script: {instanceID: 12764}
+      Script: {instanceID: 12720}
     - Class: 114
-      Script: {instanceID: 12828}
+      Script: {instanceID: 12804}
     - Class: 114
-      Script: {instanceID: 12846}
+      Script: {instanceID: 12868}
     - Class: 114
-      Script: {instanceID: 12854}
+      Script: {instanceID: 12886}
     - Class: 114
-      Script: {instanceID: 12970}
+      Script: {instanceID: 12894}
     - Class: 114
-      Script: {instanceID: 13152}
+      Script: {instanceID: 13010}
     - Class: 114
-      Script: {instanceID: 13320}
+      Script: {instanceID: 13198}
     - Class: 114
-      Script: {instanceID: 13360}
+      Script: {instanceID: 13222}
     - Class: 114
-      Script: {instanceID: 13366}
+      Script: {instanceID: 13372}
     - Class: 114
-      Script: {instanceID: 13434}
+      Script: {instanceID: 13414}
     - Class: 114
-      Script: {instanceID: 31794}
+      Script: {instanceID: 13420}
+    - Class: 114
+      Script: {instanceID: 13488}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -661,6 +716,12 @@ ScriptsOnlyBuild:
     className: PhotonRigidbody2DView
   - hash:
       serializedVersion: 2
+      Hash: e4be0fa4b406de4e14bdcf6881c463be
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: QuestionsManager
+  - hash:
+      serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: PhotonUnityNetworking.Utilities.dll
     namespaceName: Photon.Pun.UtilityScripts
@@ -785,6 +846,12 @@ ScriptsOnlyBuild:
     assemblyName: PhotonUnityNetworking.Demos.dll
     namespaceName: Photon.Pun.Demo.Cockpit
     className: CurrentRoomIsOpenToggle
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: MainScript
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
@@ -1327,6 +1394,12 @@ ScriptsOnlyBuild:
     className: TMP_StyleSheet
   - hash:
       serializedVersion: 2
+      Hash: bf3c25cd75facbc3f0058cfceb6ed5c5
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: PhotonManager
+  - hash:
+      serializedVersion: 2
       Hash: 2b53d93770b9036b2fd1c7854560bc69
     assemblyName: PhotonUnityNetworking.Utilities.dll
     namespaceName: Photon.Pun.UtilityScripts
@@ -1573,11 +1646,12 @@ ScriptsOnlyBuild:
     className: PlayableTrack
   - hash:
       serializedVersion: 2
-      Hash: bf3c25cd75facbc3f0058cfceb6ed5c5
+      Hash: 757c3eaa6510b537693b1fb3baea024c
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
-    className: PhotonManager
+    className: GameManager
   platform: 5
   scenePathNames:
   - Assets/_Scenes/LobbyView.unity
+  - Assets/_Scenes/GameView.unity
   playerPath: C:/Users/Akshay B/Documents/UnityProjects/inspiritvr-task/InspiritVRTask/Builds/PC/InspiritVRTask.exe

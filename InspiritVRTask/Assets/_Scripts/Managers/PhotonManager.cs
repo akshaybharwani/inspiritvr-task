@@ -251,7 +251,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
          PhotonNetwork.CurrentRoom.IsOpen = false;
          PhotonNetwork.CurrentRoom.IsVisible = false;
 
-         PhotonNetwork.LoadLevel("DemoAsteroids-GameScene");
+         PhotonNetwork.LoadLevel(1);
      }
 
      #endregion

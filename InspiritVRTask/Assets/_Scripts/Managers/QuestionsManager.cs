@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Models;
-using Proyecto26;
+﻿using Proyecto26;
 using UnityEngine;
 
 public class QuestionsManager : MonoBehaviour
@@ -12,7 +9,6 @@ public class QuestionsManager : MonoBehaviour
     private string firebaseDBURL;
 
     private QuestionCollection _questionCollection = new QuestionCollection();
-    private Question _question = new Question();
 
     #endregion
     
