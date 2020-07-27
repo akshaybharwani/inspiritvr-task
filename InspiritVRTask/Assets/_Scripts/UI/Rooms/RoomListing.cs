@@ -1,49 +1,38 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Security.Cryptography;
 using Photon.Pun;
-using Photon.Realtime;
+using TMPro;
 using UnityEngine;
+using Photon.Realtime;
 
-public class RoomListing : MonoBehaviourPunCallbacks
+public class RoomListing : MonoBehaviour
 {
+    #region Public Variables
+
+    public RoomInfo RoomInfo { get; private set; }
+
+    #endregion
+    
     #region Private Variables
 
     [SerializeField] 
-    private Transform roomListingParent;
-    
-    [SerializeField]
-    private RoomListingMenu roomListingPrefab;
-    
-    private List<RoomListingMenu> _listings = new List<RoomListingMenu>();
+    private TextMeshProUGUI roomListingText;
 
     #endregion
-
-    public override void OnRoomListUpdate(List<RoomInfo> roomList)
+    
+    public RoomListing(RoomInfo roomInfo)
     {
-        foreach (var roomInfo in roomList)
-        {
-            if (roomInfo.RemovedFromList)
-            {
-                int index = _listings.FindIndex(x => x.RoomInfo.Name == roomInfo.Name);
+        RoomInfo = roomInfo;
+    }
 
-                if (index != -1)
-                {
-                    Destroy(_listings[index].gameObject);
-                    _listings.RemoveAt(index);
-                }
-            }
-            else
-            {
-                RoomListingMenu roomListing = Instantiate(roomListingPrefab, roomListingParent);
+    public void SetRoomInfo(RoomInfo roomInfo)
+    {
+        RoomInfo = roomInfo;
+        roomListingText.text = roomInfo.Name + ", " + roomInfo.MaxPlayers;
+    }
 
-                if (roomListing)
-                {
-                    roomListing.SetRoomInfo(roomInfo);
-                    _listings.Add(roomListing);
-                }
-            }
-            
-        }
+    public void onClick_JoinRoom()
+    {
+        PhotonNetwork.JoinRoom(RoomInfo.Name);
     }
 }

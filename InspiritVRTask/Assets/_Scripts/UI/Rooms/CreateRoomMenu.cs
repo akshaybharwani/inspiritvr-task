@@ -39,7 +39,7 @@ public class CreateRoomMenu : MonoBehaviourPunCallbacks
         Debug.Log("Created Room successfully");
         
         // Show Current Room Canvas when the Room is created
-        _UIManager.currentRoomCanvas.enabled = true;
+        _UIManager.ToggleCurrentRoomCanvas(true);
     }
 
     public override void OnCreateRoomFailed(short returnCode, string message)

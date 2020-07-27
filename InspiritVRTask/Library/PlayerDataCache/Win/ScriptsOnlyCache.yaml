@@ -1,16 +1,11 @@
 ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
-    - CreateRoom
-    - GameSettings
-    - MasterManager
-    - RoomListing
-    - RoomListings
-    - SingletonReferences
-    - TestConnect
+    - PhotonManager
     PhotonUnityNetworking.Demos.dll:
     - Photon.Pun.Demo.Asteroids.Asteroid
     - Photon.Pun.Demo.Asteroids.Bullet
+    - Photon.Pun.Demo.Asteroids.RoomListEntry
     - Photon.Pun.Demo.Asteroids.Spaceship
     - Photon.Pun.Demo.PunBasics.CameraWork
     - Photon.Pun.Demo.PunBasics.PlayerAnimatorManager
@@ -18,8 +13,11 @@ ScriptsOnlyBuild:
     - Photon.Pun.Demo.PunBasics.PlayerUI
     - Photon.Pun.Demo.SlotRacer.PlayerControl
     - Photon.Pun.Demo.SlotRacer.Utils.SplineWalker
-    PhotonUnityNetworking.Editor.dll:
-    - ServerSettingsInspector
+    - PlayerListEntry
+    PhotonUnityNetworking.Utilities.dll:
+    - Photon.Pun.UtilityScripts.EventSystemSpawner
+    - Photon.Pun.UtilityScripts.PlayerNumbering
+    - Photon.Pun.UtilityScripts.TextButtonTransition
     PhotonUnityNetworking.dll:
     - Photon.Pun.PhotonAnimatorView
     - Photon.Pun.PhotonRigidbodyView
@@ -31,11 +29,9 @@ ScriptsOnlyBuild:
     - Packages.Rider.Editor.UnitTesting.CallbackData
     Unity.TextMeshPro.dll:
     - TMPro.TMP_FontAsset
-    - TMPro.TMP_InputField
     - TMPro.TMP_Settings
     - TMPro.TMP_SpriteAsset
     - TMPro.TMP_StyleSheet
-    - TMPro.TextMeshProUGUI
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
@@ -47,21 +43,23 @@ ScriptsOnlyBuild:
     - UnityEditor.TestTools.TestRunner.TestListCacheData
     - UnityEditor.TestTools.TestRunner.TestRun.TestJobDataHolder
     UnityEngine.UI.dll:
-    - UnityEngine.EventSystems.EventSystem
-    - UnityEngine.EventSystems.StandaloneInputModule
     - UnityEngine.UI.Button
     - UnityEngine.UI.CanvasScaler
-    - UnityEngine.UI.ContentSizeFitter
     - UnityEngine.UI.GraphicRaycaster
+    - UnityEngine.UI.GridLayoutGroup
+    - UnityEngine.UI.HorizontalLayoutGroup
     - UnityEngine.UI.Image
-    - UnityEngine.UI.RectMask2D
+    - UnityEngine.UI.InputField
+    - UnityEngine.UI.LayoutElement
+    - UnityEngine.UI.Mask
     - UnityEngine.UI.ScrollRect
+    - UnityEngine.UI.Scrollbar
     - UnityEngine.UI.Shadow
     - UnityEngine.UI.Slider
     - UnityEngine.UI.Text
     - UnityEngine.UI.VerticalLayoutGroup
   sceneClasses:
-    Assets/_Scenes/RoomView.unity:
+    Assets/_Scenes/LobbyView.unity:
     - Class: 1
       Script: {instanceID: 0}
     - Class: 4
@@ -98,8 +96,6 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 104
       Script: {instanceID: 0}
-    - Class: 108
-      Script: {instanceID: 0}
     - Class: 109
       Script: {instanceID: 0}
     - Class: 114
@@ -121,68 +117,68 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11348}
     - Class: 114
-      Script: {instanceID: 11368}
+      Script: {instanceID: 11370}
     - Class: 114
-      Script: {instanceID: 11468}
+      Script: {instanceID: 11408}
     - Class: 114
-      Script: {instanceID: 11556}
+      Script: {instanceID: 11508}
     - Class: 114
-      Script: {instanceID: 11686}
+      Script: {instanceID: 11588}
     - Class: 114
-      Script: {instanceID: 11728}
+      Script: {instanceID: 11814}
     - Class: 114
-      Script: {instanceID: 11852}
+      Script: {instanceID: 11958}
     - Class: 114
-      Script: {instanceID: 11912}
+      Script: {instanceID: 11998}
     - Class: 114
-      Script: {instanceID: 11946}
+      Script: {instanceID: 12204}
     - Class: 114
-      Script: {instanceID: 11986}
+      Script: {instanceID: 12268}
     - Class: 114
-      Script: {instanceID: 12102}
+      Script: {instanceID: 12456}
     - Class: 114
-      Script: {instanceID: 12190}
+      Script: {instanceID: 12496}
     - Class: 114
-      Script: {instanceID: 12254}
+      Script: {instanceID: 12516}
     - Class: 114
-      Script: {instanceID: 12278}
+      Script: {instanceID: 12528}
     - Class: 114
-      Script: {instanceID: 12442}
+      Script: {instanceID: 12608}
     - Class: 114
-      Script: {instanceID: 12502}
+      Script: {instanceID: 12618}
     - Class: 114
-      Script: {instanceID: 12514}
+      Script: {instanceID: 12630}
     - Class: 114
-      Script: {instanceID: 12594}
-    - Class: 114
-      Script: {instanceID: 12602}
-    - Class: 114
-      Script: {instanceID: 12648}
+      Script: {instanceID: 12660}
     - Class: 114
       Script: {instanceID: 12664}
     - Class: 114
-      Script: {instanceID: 12812}
+      Script: {instanceID: 12680}
     - Class: 114
-      Script: {instanceID: 12830}
+      Script: {instanceID: 12764}
     - Class: 114
-      Script: {instanceID: 12838}
+      Script: {instanceID: 12828}
     - Class: 114
-      Script: {instanceID: 12892}
+      Script: {instanceID: 12846}
     - Class: 114
-      Script: {instanceID: 13136}
+      Script: {instanceID: 12854}
     - Class: 114
-      Script: {instanceID: 13304}
+      Script: {instanceID: 12970}
     - Class: 114
-      Script: {instanceID: 13386}
+      Script: {instanceID: 13152}
     - Class: 114
-      Script: {instanceID: 13418}
+      Script: {instanceID: 13320}
     - Class: 114
-      Script: {instanceID: 14258}
+      Script: {instanceID: 13360}
     - Class: 114
-      Script: {instanceID: 15454}
+      Script: {instanceID: 13366}
     - Class: 114
-      Script: {instanceID: 15924}
+      Script: {instanceID: 13434}
+    - Class: 114
+      Script: {instanceID: 31794}
     - Class: 115
+      Script: {instanceID: 0}
+    - Class: 124
       Script: {instanceID: 0}
     - Class: 128
       Script: {instanceID: 0}
@@ -371,6 +367,12 @@ ScriptsOnlyBuild:
     className: PlayerAnimatorManager
   - hash:
       serializedVersion: 2
+      Hash: 8a9ff964ab4b822a2356b366134d5c1a
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: SingletonReferences
+  - hash:
+      serializedVersion: 2
       Hash: c656dcc13ae391b68d594cc8f9c590b0
     assemblyName: PhotonUnityNetworking.Demos.dll
     namespaceName: Photon.Pun.Demo.Cockpit
@@ -485,6 +487,12 @@ ScriptsOnlyBuild:
     className: ConnectAndJoinRandomLb
   - hash:
       serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: LeaveRoomMenu
+  - hash:
+      serializedVersion: 2
       Hash: 8aa3d6ccbcb54ee8db6c1229854adaaa
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
@@ -507,6 +515,12 @@ ScriptsOnlyBuild:
     assemblyName: PhotonUnityNetworking.Demos.dll
     namespaceName: Photon.Pun.Demo.Cockpit
     className: FriendListCell
+  - hash:
+      serializedVersion: 2
+      Hash: fc9e1fafdee8c84e91e6b4eb5e455676
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: PlayerListing
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
@@ -533,6 +547,12 @@ ScriptsOnlyBuild:
     className: PhysicsRaycaster
   - hash:
       serializedVersion: 2
+      Hash: 2695cd97a01d5de074996771d37fb853
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: RoomListingMenu
+  - hash:
+      serializedVersion: 2
       Hash: 72f0e262cec16c9f4520dc3bf2b81796
     assemblyName: PhotonUnityNetworking.Demos.dll
     namespaceName: Photon.Pun.Demo.SlotRacer.Utils
@@ -549,6 +569,12 @@ ScriptsOnlyBuild:
     assemblyName: PhotonUnityNetworking.dll
     namespaceName: Photon.Pun
     className: PhotonHandler
+  - hash:
+      serializedVersion: 2
+      Hash: d68a47d59ac719f062eb65d708b34307
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: RoomListing
   - hash:
       serializedVersion: 2
       Hash: bd3cf68c8964d3c66d1c43f4f98508c9
@@ -605,6 +631,12 @@ ScriptsOnlyBuild:
     className: GameSettings
   - hash:
       serializedVersion: 2
+      Hash: ef23f3cf7a53cc0a54cddf8a420f4c97
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: PlayerListingMenu
+  - hash:
+      serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: PhotonUnityNetworking.Demos.dll
     namespaceName: Photon.Pun.Demo
@@ -650,7 +682,7 @@ ScriptsOnlyBuild:
       Hash: 272ba6c1ec8fb07f160d8c9b346c0ce2
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
-    className: CreateRoom
+    className: CreateRoomMenu
   - hash:
       serializedVersion: 2
       Hash: 24f79094aff162c9aa69c31d64d777d3
@@ -801,6 +833,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: ChannelSelector
+  - hash:
+      serializedVersion: 2
+      Hash: bc96202b2dbf9d1f7a5ad02888e9bf49
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: UIManager
   - hash:
       serializedVersion: 2
       Hash: 14f6e7d5314d3aff9265172f9d1e95a9
@@ -1417,7 +1455,7 @@ ScriptsOnlyBuild:
       serializedVersion: 2
       Hash: 55c5d4231b5b81f8762aca1b7e16819e
     assemblyName: PhotonUnityNetworking.Demos.dll
-    namespaceName: Photon.Pun.Demo.Asteroids
+    namespaceName: 
     className: PlayerListEntry
   - hash:
       serializedVersion: 2
@@ -1535,23 +1573,11 @@ ScriptsOnlyBuild:
     className: PlayableTrack
   - hash:
       serializedVersion: 2
-      Hash: 2695cd97a01d5de074996771d37fb853
+      Hash: bf3c25cd75facbc3f0058cfceb6ed5c5
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
-    className: RoomListings
-  - hash:
-      serializedVersion: 2
-      Hash: d68a47d59ac719f062eb65d708b34307
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: RoomListing
-  - hash:
-      serializedVersion: 2
-      Hash: 8a9ff964ab4b822a2356b366134d5c1a
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: SingletonReferences
+    className: PhotonManager
   platform: 5
   scenePathNames:
-  - Assets/_Scenes/RoomView.unity
+  - Assets/_Scenes/LobbyView.unity
   playerPath: C:/Users/Akshay B/Documents/UnityProjects/inspiritvr-task/InspiritVRTask/Builds/PC/InspiritVRTask.exe

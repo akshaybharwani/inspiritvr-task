@@ -9,9 +9,11 @@ public class UIManager : MonoBehaviour
 
     [Header("Room Canvases")]
     // References to the Canvases in the Game
-    public Canvas joinOrCreateRoomCanvas;
+    [SerializeField]
+    private Canvas joinOrCreateRoomCanvas;
 
-    public Canvas currentRoomCanvas;
+    [SerializeField]
+    private Canvas currentRoomCanvas;
 
     #endregion
     
@@ -25,5 +27,15 @@ public class UIManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void ToggleJoinOrCreateRoomCanvas(bool toggleValue)
+    {
+        joinOrCreateRoomCanvas.enabled = toggleValue;
+    }
+    
+    public void ToggleCurrentRoomCanvas(bool toggleValue)
+    {
+        currentRoomCanvas.enabled = toggleValue;
     }
 }
