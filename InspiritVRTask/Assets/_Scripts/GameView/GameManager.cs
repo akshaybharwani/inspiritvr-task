@@ -6,6 +6,7 @@ using Photon.Pun.UtilityScripts;
 using Photon.Realtime;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
 
@@ -14,11 +15,14 @@ public class GameManager : MonoBehaviourPunCallbacks
     public static GameManager Instance;
  
     [Header("UI References")]
-    public TextMeshProUGUI InfoText;
+    public TextMeshProUGUI infoText;
 
     public CanvasGroup gamePanelCanvasGroup;
 
     public CountdownTimerController countdownTimerController;
+
+    public CanvasGroup endGamePanelCanvasGroup;
+    public TextMeshProUGUI endGameText;
 
     private QuestionsManager _questionsManager;
 
@@ -68,16 +72,16 @@ public class GameManager : MonoBehaviourPunCallbacks
         {
             // Hide the Game Panel 
             gamePanelCanvasGroup.DOFade(0, 2f);
+            endGamePanelCanvasGroup.DOFade(1, 2f);
+            endGamePanelCanvasGroup.interactable = true;
             
-            InfoText.text =
-                $"Player {winner} won with {score} points.\n\n\nReturning back to All Players screen in {timer.ToString("n2")} seconds.";
+            endGameText.text =
+                $"Player {winner} won with {score} points.";
 
             yield return new WaitForEndOfFrame();
 
             timer -= Time.deltaTime;
         }
-
-        //PhotonNetwork.LeaveRoom();
     }
 
     #endregion
@@ -136,7 +140,7 @@ public class GameManager : MonoBehaviourPunCallbacks
             else
             {
                 // not all players loaded yet. wait:
-                InfoText.text = "Waiting for other players...";
+                infoText.text = "Waiting for other players...";
             }
         }
     }
@@ -170,7 +174,6 @@ public class GameManager : MonoBehaviourPunCallbacks
                     continue;
                 }
             }
-
             return false;
         }
 
@@ -203,5 +206,10 @@ public class GameManager : MonoBehaviourPunCallbacks
     private void OnCountdownTimerIsExpired()
     {
         StartGame();
+    }
+
+    public void PlayAgain()
+    {
+        SceneManager.LoadScene(0);
     }
 }

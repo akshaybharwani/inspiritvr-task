@@ -8,7 +8,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
-public class PhotonManager : MonoBehaviourPunCallbacks
+public class LobbyManager : MonoBehaviourPunCallbacks
  {
      [Header("Login Panel")]
      public GameObject LoginPanel;
@@ -301,8 +301,8 @@ public class PhotonManager : MonoBehaviourPunCallbacks
              }
          }
 
-         /*if (!areMinPlayersAvailable())
-             return false;*/
+         if (!areMinPlayersAvailable())
+             return false;
          
          return true;
      }

@@ -73,7 +73,7 @@ public class PlayerEntryController : MonoBehaviour
 
         if (PhotonNetwork.IsMasterClient)
         {
-            FindObjectOfType<PhotonManager>().LocalPlayerPropertiesUpdated();
+            FindObjectOfType<LobbyManager>().LocalPlayerPropertiesUpdated();
         }
     }
 }

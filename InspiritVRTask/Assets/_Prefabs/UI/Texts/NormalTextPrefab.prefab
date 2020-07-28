@@ -66,15 +66,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: Akshay
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 49ed4bd7ef2d3784cbce60fdb54b1c0c, type: 2}
-  m_sharedMaterial: {fileID: 760518793474111448, guid: 49ed4bd7ef2d3784cbce60fdb54b1c0c,
+  m_fontAsset: {fileID: 11400000, guid: 21a056e536272334d8f90f04fa409660, type: 2}
+  m_sharedMaterial: {fileID: -2115522221273946567, guid: 21a056e536272334d8f90f04fa409660,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
+    rgba: 4293543522
   m_fontColor: {r: 0.38431373, g: 0.27450982, b: 0.91764706, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
