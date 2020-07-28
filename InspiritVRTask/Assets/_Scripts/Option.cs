@@ -40,6 +40,6 @@ public class Option : MonoBehaviour
     /// </summary>
     public void onClick_OptionButton()
     {
-        _questionsManager.IsOptionCorrect(_optionNumber);
+        _questionsManager.SetSelectedOption(_optionNumber);
     }
 }

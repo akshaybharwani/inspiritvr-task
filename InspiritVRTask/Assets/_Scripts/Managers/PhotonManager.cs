@@ -233,6 +233,8 @@ public class PhotonManager : MonoBehaviourPunCallbacks
 
      public void OnLeaveGameButtonClicked()
      {
+         _lobbyBreadcrumbsController.ToggleAllPlayersLabel(false);
+         
          PhotonNetwork.LeaveRoom();
      }
 
@@ -299,8 +301,8 @@ public class PhotonManager : MonoBehaviourPunCallbacks
              }
          }
 
-         if (!areMinPlayersAvailable())
-             return false;
+         /*if (!areMinPlayersAvailable())
+             return false;*/
          
          return true;
      }

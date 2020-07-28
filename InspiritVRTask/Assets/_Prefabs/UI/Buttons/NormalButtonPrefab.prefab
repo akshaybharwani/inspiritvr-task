@@ -290,4 +290,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 00cd3ea1f5e980b438cdd7f7b63772b3, type: 2}
-  radius: 12.39
+  radius: 12

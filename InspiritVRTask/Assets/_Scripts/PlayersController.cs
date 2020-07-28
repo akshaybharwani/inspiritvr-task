@@ -12,27 +12,42 @@ public class PlayersController : MonoBehaviourPunCallbacks
 {
     #region Private Variables
 
+    [Header("All Player Scores UI References")]
     [SerializeField]
-    private PlayerInGame playerInGamePrefab;
+    private PlayerScoreController playerScoreControllerPrefab;
 
     [SerializeField] 
     private Transform playersParent;
 
+    [Header("Local Player UI References")] 
+    [SerializeField]
+    private PlayerScoreController localPlayerScoreController;
+
     #endregion
 
-    private Dictionary<int, PlayerInGame> playerListEntries;
+    private Dictionary<int, PlayerScoreController> playerListEntries;
 
     #region UNITY
 
     public void Awake()
     {
-        playerListEntries = new Dictionary<int, PlayerInGame>();
+        playerListEntries = new Dictionary<int, PlayerScoreController>();
 
         foreach (Player p in PhotonNetwork.PlayerList)
         {
-            PlayerInGame entry = Instantiate(playerInGamePrefab, playersParent);
-            entry.SetPlayerName(p.NickName);
-            playerListEntries.Add(p.ActorNumber, entry);
+            // Check if the Player is Local
+            if (p.IsLocal)
+            {
+                // If it is, update the name
+                localPlayerScoreController.SetPlayerScoreName(p.NickName);
+            }
+            else
+            {
+                // If it's not, Instantiate new GameObjects of PlayerScore
+                PlayerScoreController entry = Instantiate(playerScoreControllerPrefab, playersParent);
+                entry.SetPlayerScoreName(p.NickName);
+                playerListEntries.Add(p.ActorNumber, entry);
+            }
         }
     }
 
@@ -48,10 +63,19 @@ public class PlayersController : MonoBehaviourPunCallbacks
 
     public override void OnPlayerPropertiesUpdate(Player targetPlayer, Hashtable changedProps)
     {
-        PlayerInGame entry;
-        if (playerListEntries.TryGetValue(targetPlayer.ActorNumber, out entry))
+        // Check if the Player is Local
+        if (targetPlayer.IsLocal)
         {
-            entry.SetPlayerScore(targetPlayer.GetScore());
+            // Set the score
+            localPlayerScoreController.SetPlayerScore(targetPlayer.GetScore());
+        }
+        else
+        {
+            PlayerScoreController entry;
+            if (playerListEntries.TryGetValue(targetPlayer.ActorNumber, out entry))
+            {
+                entry.SetPlayerScore(targetPlayer.GetScore());
+            }
         }
     }
 

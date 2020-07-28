@@ -36,7 +36,7 @@ public class PlayerEntryController : MonoBehaviour
     {
         if (PhotonNetwork.LocalPlayer.ActorNumber != _ownerID)
         {
-            playerReadyButton.gameObject.SetActive(false);
+            playerReadyButton.enabled = false;
         }
         else
         {

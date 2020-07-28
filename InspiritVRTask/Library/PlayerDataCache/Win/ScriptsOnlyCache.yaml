@@ -1,21 +1,23 @@
 ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
+    - CountdownTimerController
     - GameManager
     - LobbyBreadcrumbsController
     - Option
     - PhotonManager
     - PlayerEntryController
-    - PlayerInGame
+    - PlayerScoreController
     - PlayersController
     - QuestionsManager
     - RoomEntryController
+    DOTween.dll:
+    - DG.Tweening.Core.DOTweenSettings
     Nobi.UiRoundedCorners.dll:
     - ImageWithRoundedCorners
     PhotonUnityNetworking.Demos.dll:
     - Photon.Pun.Demo.Asteroids.Asteroid
     - Photon.Pun.Demo.Asteroids.Bullet
-    - Photon.Pun.Demo.Asteroids.PlayerOverviewPanel
     - Photon.Pun.Demo.Asteroids.Spaceship
     - Photon.Pun.Demo.PunBasics.CameraWork
     - Photon.Pun.Demo.PunBasics.PlayerAnimatorManager
@@ -24,7 +26,6 @@ ScriptsOnlyBuild:
     - Photon.Pun.Demo.SlotRacer.PlayerControl
     - Photon.Pun.Demo.SlotRacer.Utils.SplineWalker
     PhotonUnityNetworking.Utilities.dll:
-    - Photon.Pun.UtilityScripts.CountdownTimer
     - Photon.Pun.UtilityScripts.EventSystemSpawner
     - Photon.Pun.UtilityScripts.PlayerNumbering
     PhotonUnityNetworking.dll:
@@ -80,47 +81,53 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 48
       Script: {instanceID: 0}
+    - Class: 74
+      Script: {instanceID: 0}
     - Class: 81
+      Script: {instanceID: 0}
+    - Class: 91
+      Script: {instanceID: 0}
+    - Class: 95
       Script: {instanceID: 0}
     - Class: 104
       Script: {instanceID: 0}
-    - Class: 108
-      Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11170}
+      Script: {instanceID: 11180}
     - Class: 114
-      Script: {instanceID: 11172}
+      Script: {instanceID: 11184}
     - Class: 114
-      Script: {instanceID: 11176}
+      Script: {instanceID: 11188}
     - Class: 114
-      Script: {instanceID: 11182}
+      Script: {instanceID: 11190}
     - Class: 114
-      Script: {instanceID: 11204}
+      Script: {instanceID: 11212}
     - Class: 114
-      Script: {instanceID: 11862}
+      Script: {instanceID: 11492}
     - Class: 114
-      Script: {instanceID: 12198}
+      Script: {instanceID: 11604}
     - Class: 114
-      Script: {instanceID: 12200}
+      Script: {instanceID: 11746}
     - Class: 114
-      Script: {instanceID: 12384}
+      Script: {instanceID: 11906}
     - Class: 114
-      Script: {instanceID: 12708}
+      Script: {instanceID: 12168}
     - Class: 114
-      Script: {instanceID: 12954}
+      Script: {instanceID: 12258}
     - Class: 114
-      Script: {instanceID: 13016}
+      Script: {instanceID: 12458}
     - Class: 114
-      Script: {instanceID: 13518}
+      Script: {instanceID: 12500}
     - Class: 114
-      Script: {instanceID: 13526}
+      Script: {instanceID: 12634}
     - Class: 114
-      Script: {instanceID: 13558}
+      Script: {instanceID: 12792}
     - Class: 114
-      Script: {instanceID: 16356}
+      Script: {instanceID: 13052}
+    - Class: 114
+      Script: {instanceID: 13114}
+    - Class: 114
+      Script: {instanceID: 13668}
     - Class: 115
-      Script: {instanceID: 0}
-    - Class: 128
       Script: {instanceID: 0}
     - Class: 157
       Script: {instanceID: 0}
@@ -133,6 +140,8 @@ ScriptsOnlyBuild:
     - Class: 223
       Script: {instanceID: 0}
     - Class: 224
+      Script: {instanceID: 0}
+    - Class: 225
       Script: {instanceID: 0}
     Assets/_Scenes/LobbyView.unity:
     - Class: 1
@@ -174,83 +183,85 @@ ScriptsOnlyBuild:
     - Class: 109
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11170}
-    - Class: 114
-      Script: {instanceID: 11172}
-    - Class: 114
-      Script: {instanceID: 11174}
-    - Class: 114
-      Script: {instanceID: 11176}
-    - Class: 114
       Script: {instanceID: 11178}
     - Class: 114
       Script: {instanceID: 11180}
     - Class: 114
       Script: {instanceID: 11182}
     - Class: 114
-      Script: {instanceID: 11204}
+      Script: {instanceID: 11184}
     - Class: 114
-      Script: {instanceID: 11352}
+      Script: {instanceID: 11186}
     - Class: 114
-      Script: {instanceID: 11374}
+      Script: {instanceID: 11188}
     - Class: 114
-      Script: {instanceID: 11476}
+      Script: {instanceID: 11190}
     - Class: 114
-      Script: {instanceID: 11570}
+      Script: {instanceID: 11212}
     - Class: 114
-      Script: {instanceID: 11708}
+      Script: {instanceID: 11320}
     - Class: 114
-      Script: {instanceID: 11976}
+      Script: {instanceID: 11366}
     - Class: 114
-      Script: {instanceID: 12020}
+      Script: {instanceID: 11382}
     - Class: 114
-      Script: {instanceID: 12232}
+      Script: {instanceID: 11404}
+    - Class: 114
+      Script: {instanceID: 11508}
+    - Class: 114
+      Script: {instanceID: 11604}
+    - Class: 114
+      Script: {instanceID: 11746}
+    - Class: 114
+      Script: {instanceID: 12022}
+    - Class: 114
+      Script: {instanceID: 12070}
+    - Class: 114
+      Script: {instanceID: 12170}
     - Class: 114
       Script: {instanceID: 12296}
     - Class: 114
-      Script: {instanceID: 12490}
+      Script: {instanceID: 12362}
     - Class: 114
-      Script: {instanceID: 12554}
+      Script: {instanceID: 12392}
+    - Class: 114
+      Script: {instanceID: 12500}
     - Class: 114
       Script: {instanceID: 12568}
     - Class: 114
-      Script: {instanceID: 12650}
+      Script: {instanceID: 12634}
     - Class: 114
-      Script: {instanceID: 12662}
+      Script: {instanceID: 12648}
     - Class: 114
-      Script: {instanceID: 12704}
+      Script: {instanceID: 12732}
     - Class: 114
-      Script: {instanceID: 12708}
+      Script: {instanceID: 12744}
     - Class: 114
-      Script: {instanceID: 12724}
+      Script: {instanceID: 12788}
     - Class: 114
-      Script: {instanceID: 12874}
+      Script: {instanceID: 12792}
     - Class: 114
-      Script: {instanceID: 12892}
+      Script: {instanceID: 12808}
     - Class: 114
-      Script: {instanceID: 12900}
+      Script: {instanceID: 12964}
     - Class: 114
-      Script: {instanceID: 12954}
+      Script: {instanceID: 12982}
     - Class: 114
-      Script: {instanceID: 13016}
+      Script: {instanceID: 12990}
     - Class: 114
-      Script: {instanceID: 13204}
+      Script: {instanceID: 13052}
     - Class: 114
-      Script: {instanceID: 13228}
+      Script: {instanceID: 13114}
     - Class: 114
-      Script: {instanceID: 13378}
+      Script: {instanceID: 13314}
     - Class: 114
-      Script: {instanceID: 13426}
+      Script: {instanceID: 13338}
     - Class: 114
-      Script: {instanceID: 13496}
+      Script: {instanceID: 13488}
     - Class: 114
-      Script: {instanceID: 16356}
+      Script: {instanceID: 13536}
     - Class: 114
-      Script: {instanceID: 28386}
-    - Class: 114
-      Script: {instanceID: 43174}
-    - Class: 114
-      Script: {instanceID: 51940}
+      Script: {instanceID: 13606}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -406,6 +417,12 @@ ScriptsOnlyBuild:
     className: CurrentRoomMaxPlayersProperty
   - hash:
       serializedVersion: 2
+      Hash: df3df4859f6f29593258f1966efad3d7
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: RoomEntryController
+  - hash:
+      serializedVersion: 2
       Hash: 3ba023cd67d72cace33969ab863e0fd4
     assemblyName: PhotonUnityNetworking.Utilities.dll
     namespaceName: Photon.Pun.UtilityScripts
@@ -416,6 +433,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: ChatGui
+  - hash:
+      serializedVersion: 2
+      Hash: bed12c6c9c8ba54a1d22ede84873eec9
+    assemblyName: Nobi.UiRoundedCorners.dll
+    namespaceName: 
+    className: ImageWithIndependentRoundedCorners
   - hash:
       serializedVersion: 2
       Hash: 74c875e0f15c48e0a55f06093aa93e15
@@ -434,6 +457,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.TestRunner.dll
     namespaceName: UnityEngine.TestTools.TestRunner.Callbacks
     className: PlayerQuitHandler
+  - hash:
+      serializedVersion: 2
+      Hash: a2c0e58df13d9ae788eeb80efa79dc7a
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: LobbyBreadcrumbsController
   - hash:
       serializedVersion: 2
       Hash: bd4c580f02d31d4be48d7a47440392c4
@@ -518,6 +547,12 @@ ScriptsOnlyBuild:
     assemblyName: PhotonUnityNetworking.Demos.dll
     namespaceName: Photon.Pun.Demo.Hub
     className: DemoHubManager
+  - hash:
+      serializedVersion: 2
+      Hash: 47a6723a382eb0886a1496a8d6b11582
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: PlayerScoreController
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
@@ -736,7 +771,7 @@ ScriptsOnlyBuild:
     className: PhotonRigidbody2DView
   - hash:
       serializedVersion: 2
-      Hash: 40a72430f0f045491ad1c1a7e1bbc937
+      Hash: aa9958185d2626b4b58997fbea91025c
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: QuestionsManager
@@ -868,6 +903,18 @@ ScriptsOnlyBuild:
     className: CurrentRoomIsOpenToggle
   - hash:
       serializedVersion: 2
+      Hash: e928db78cbc3a032ee4e44da656eedb3
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: CountdownTimerController
+  - hash:
+      serializedVersion: 2
+      Hash: 23d30c727215e92b3765cf520a3b2204
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: PlayerEntryController
+  - hash:
+      serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
@@ -904,7 +951,7 @@ ScriptsOnlyBuild:
     className: CloudRegionProperty
   - hash:
       serializedVersion: 2
-      Hash: d59eadc7b5c78423bb31031c5231253f
+      Hash: 73ab09256786b453c7084caaf984bd44
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayersController
@@ -1000,6 +1047,18 @@ ScriptsOnlyBuild:
     className: CurrentRoomPropertiesListedInLobbyProperty
   - hash:
       serializedVersion: 2
+      Hash: 704dcd31abc789439bc3f3cd10b58c2b
+    assemblyName: DOTween.dll
+    namespaceName: DG.Tweening.Core
+    className: DOTweenComponent
+  - hash:
+      serializedVersion: 2
+      Hash: 179648033371456981a3c08cb9f47477
+    assemblyName: DOTween.dll
+    namespaceName: DG.Tweening.Core
+    className: DOTweenSettings
+  - hash:
+      serializedVersion: 2
       Hash: 2c0661f11a35f199f8a2981607e0fd2e
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
@@ -1042,7 +1101,7 @@ ScriptsOnlyBuild:
     className: OnClickDestroy
   - hash:
       serializedVersion: 2
-      Hash: 757c3eaa6510b537693b1fb3baea024c
+      Hash: 038e83bc83ab3459e9133a72f077cc5a
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameManager
@@ -1064,6 +1123,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TextContainer
+  - hash:
+      serializedVersion: 2
+      Hash: c525b65e922978828d6cfe06104e263b
+    assemblyName: Nobi.UiRoundedCorners.dll
+    namespaceName: 
+    className: ImageWithRoundedCorners
   - hash:
       serializedVersion: 2
       Hash: f84d945e5e1ca985698660fc26e9657f
@@ -1648,12 +1713,6 @@ ScriptsOnlyBuild:
     className: BoolInputField
   - hash:
       serializedVersion: 2
-      Hash: 132de608613e06915f9b009fdd59a152
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: PlayerInGame
-  - hash:
-      serializedVersion: 2
       Hash: 0fd6822f6177297bd0eb4d83cc7a9030
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
@@ -1694,36 +1753,6 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Option
-  - hash:
-      serializedVersion: 2
-      Hash: bed12c6c9c8ba54a1d22ede84873eec9
-    assemblyName: Nobi.UiRoundedCorners.dll
-    namespaceName: 
-    className: ImageWithIndependentRoundedCorners
-  - hash:
-      serializedVersion: 2
-      Hash: c525b65e922978828d6cfe06104e263b
-    assemblyName: Nobi.UiRoundedCorners.dll
-    namespaceName: 
-    className: ImageWithRoundedCorners
-  - hash:
-      serializedVersion: 2
-      Hash: a2c0e58df13d9ae788eeb80efa79dc7a
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: LobbyBreadcrumbsController
-  - hash:
-      serializedVersion: 2
-      Hash: df3df4859f6f29593258f1966efad3d7
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: RoomEntryController
-  - hash:
-      serializedVersion: 2
-      Hash: 23d30c727215e92b3765cf520a3b2204
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: PlayerEntryController
   platform: 5
   scenePathNames:
   - Assets/_Scenes/LobbyView.unity

@@ -1,8 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using Photon.Pun;
 using Photon.Pun.UtilityScripts;
 using Photon.Realtime;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
@@ -10,9 +12,16 @@ using Hashtable = ExitGames.Client.Photon.Hashtable;
 public class GameManager : MonoBehaviourPunCallbacks
 {
     public static GameManager Instance;
-    
-    public Text InfoText;
-    
+ 
+    [Header("UI References")]
+    public TextMeshProUGUI InfoText;
+
+    public CanvasGroup gamePanelCanvasGroup;
+
+    public CountdownTimerController countdownTimerController;
+
+    private QuestionsManager _questionsManager;
+
     #region UNITY
 
     public void Awake()
@@ -24,7 +33,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     {
         base.OnEnable();
 
-        CountdownTimer.OnCountdownTimerHasExpired += OnCountdownTimerIsExpired;
+        countdownTimerController.OnCountdownTimerHasExpired += OnCountdownTimerIsExpired;
     }
 
     public void Start()
@@ -33,14 +42,18 @@ public class GameManager : MonoBehaviourPunCallbacks
         {
             {InspiritVRQuizGame.PLAYER_LOADED_LEVEL, true}
         };
+        
         PhotonNetwork.LocalPlayer.SetCustomProperties(props);
+        
+        // Set the QuestionsManager reference
+        _questionsManager = FindObjectOfType<QuestionsManager>();
     }
 
     public override void OnDisable()
     {
         base.OnDisable();
 
-        CountdownTimer.OnCountdownTimerHasExpired -= OnCountdownTimerIsExpired;
+        countdownTimerController.OnCountdownTimerHasExpired -= OnCountdownTimerIsExpired;
     }
 
     #endregion
@@ -53,14 +66,18 @@ public class GameManager : MonoBehaviourPunCallbacks
 
         while (timer > 0.0f)
         {
-            InfoText.text = string.Format("Player {0} won with {1} points.\n\n\nReturning to login screen in {2} seconds.", winner, score, timer.ToString("n2"));
+            // Hide the Game Panel 
+            gamePanelCanvasGroup.DOFade(0, 2f);
+            
+            InfoText.text =
+                $"Player {winner} won with {score} points.\n\n\nReturning back to All Players screen in {timer.ToString("n2")} seconds.";
 
             yield return new WaitForEndOfFrame();
 
             timer -= Time.deltaTime;
         }
 
-        PhotonNetwork.LeaveRoom();
+        //PhotonNetwork.LeaveRoom();
     }
 
     #endregion
@@ -69,7 +86,7 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     public override void OnDisconnected(DisconnectCause cause)
     {
-        //UnityEngine.SceneManagement.SceneManager.LoadScene("DemoAsteroids-LobbyScene");
+        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
     }
 
     public override void OnLeftRoom()
@@ -81,7 +98,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     {
         if (PhotonNetwork.LocalPlayer.ActorNumber == newMasterClient.ActorNumber)
         {
-            //StartCoroutine(SpawnAsteroid());
+            
         }
     }
 
@@ -103,10 +120,9 @@ public class GameManager : MonoBehaviourPunCallbacks
             return;
         }
 
-
         // if there was no countdown yet, the master client (this one) waits until everyone loaded the level and sets a timer start
         int startTimestamp;
-        bool startTimeIsSet = CountdownTimer.TryGetStartTime(out startTimestamp);
+        bool startTimeIsSet = CountdownTimerController.TryGetStartTime(out startTimestamp);
 
         if (changedProps.ContainsKey(InspiritVRQuizGame.PLAYER_LOADED_LEVEL))
         {
@@ -114,17 +130,15 @@ public class GameManager : MonoBehaviourPunCallbacks
             {
                 if (!startTimeIsSet)
                 {
-                    CountdownTimer.SetStartTime();
+                    CountdownTimerController.SetStartTime();
                 }
             }
             else
             {
                 // not all players loaded yet. wait:
-                Debug.Log("setting text waiting for players! ",this.InfoText);
                 InfoText.text = "Waiting for other players...";
             }
         }
-    
     }
 
     #endregion
@@ -133,19 +147,14 @@ public class GameManager : MonoBehaviourPunCallbacks
     // called by OnCountdownTimerIsExpired() when the timer ended
     private void StartGame()
     {
-        Debug.Log("StartGame!");
-
-        // on rejoin, we have to figure out if the spaceship exists or not
-        // if this is a rejoin (the ship is already network instantiated and will be setup via event) we don't need to call PN.Instantiate
-
+        // SHow the Game Panel
+        gamePanelCanvasGroup.DOFade(1, 2f);
         
-        float angularStart = (360.0f / PhotonNetwork.CurrentRoom.PlayerCount) * PhotonNetwork.LocalPlayer.GetPlayerNumber(); 
-        // avoid this call on rejoin (ship was network instantiated before)
-
-        if (PhotonNetwork.IsMasterClient)
-        {
-            //StartCoroutine(SpawnAsteroid());
-        }
+        // Show the first question
+        _questionsManager.SetCurrentQuestionFields();
+        
+        // Start the Timer
+        StartCoroutine(_questionsManager.StartQuestionTimer());
     }
 
     private bool CheckAllPlayerLoadedLevel()
@@ -168,44 +177,27 @@ public class GameManager : MonoBehaviourPunCallbacks
         return true;
     }
 
-    private void CheckEndOfGame()
+    public void CheckEndOfGame()
     {
-        bool allDestroyed = true;
+        if (PhotonNetwork.IsMasterClient)
+        {
+            StopAllCoroutines();
+        }
+
+        string winner = "";
+        int score = -1;
 
         foreach (Player p in PhotonNetwork.PlayerList)
         {
-            object lives;
-            if (p.CustomProperties.TryGetValue(InspiritVRQuizGame.PLAYER_LIVES, out lives))
+            if (p.GetScore() > score)
             {
-                if ((int) lives > 0)
-                {
-                    allDestroyed = false;
-                    break;
-                }
+                winner = p.NickName;
+                score = p.GetScore();
             }
         }
 
-        if (allDestroyed)
-        {
-            if (PhotonNetwork.IsMasterClient)
-            {
-                StopAllCoroutines();
-            }
-
-            string winner = "";
-            int score = -1;
-
-            foreach (Player p in PhotonNetwork.PlayerList)
-            {
-                if (p.GetScore() > score)
-                {
-                    winner = p.NickName;
-                    score = p.GetScore();
-                }
-            }
-
-            StartCoroutine(EndOfGame(winner, score));
-        }
+        Debug.Log("YOO");
+        StartCoroutine(EndOfGame(winner, score));
     }
 
     private void OnCountdownTimerIsExpired()
