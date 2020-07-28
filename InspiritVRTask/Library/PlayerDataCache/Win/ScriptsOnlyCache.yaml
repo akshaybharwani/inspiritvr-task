@@ -2,16 +2,20 @@ ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
     - GameManager
+    - LobbyBreadcrumbsController
     - Option
     - PhotonManager
+    - PlayerEntryController
     - PlayerInGame
     - PlayersController
     - QuestionsManager
+    - RoomEntryController
+    Nobi.UiRoundedCorners.dll:
+    - ImageWithRoundedCorners
     PhotonUnityNetworking.Demos.dll:
     - Photon.Pun.Demo.Asteroids.Asteroid
     - Photon.Pun.Demo.Asteroids.Bullet
     - Photon.Pun.Demo.Asteroids.PlayerOverviewPanel
-    - Photon.Pun.Demo.Asteroids.RoomListEntry
     - Photon.Pun.Demo.Asteroids.Spaceship
     - Photon.Pun.Demo.PunBasics.CameraWork
     - Photon.Pun.Demo.PunBasics.PlayerAnimatorManager
@@ -19,12 +23,10 @@ ScriptsOnlyBuild:
     - Photon.Pun.Demo.PunBasics.PlayerUI
     - Photon.Pun.Demo.SlotRacer.PlayerControl
     - Photon.Pun.Demo.SlotRacer.Utils.SplineWalker
-    - PlayerListEntry
     PhotonUnityNetworking.Utilities.dll:
     - Photon.Pun.UtilityScripts.CountdownTimer
     - Photon.Pun.UtilityScripts.EventSystemSpawner
     - Photon.Pun.UtilityScripts.PlayerNumbering
-    - Photon.Pun.UtilityScripts.TextButtonTransition
     PhotonUnityNetworking.dll:
     - Photon.Pun.PhotonAnimatorView
     - Photon.Pun.PhotonRigidbodyView
@@ -36,6 +38,7 @@ ScriptsOnlyBuild:
     - Packages.Rider.Editor.UnitTesting.CallbackData
     Unity.TextMeshPro.dll:
     - TMPro.TMP_FontAsset
+    - TMPro.TMP_InputField
     - TMPro.TMP_Settings
     - TMPro.TMP_SpriteAsset
     - TMPro.TMP_StyleSheet
@@ -53,15 +56,12 @@ ScriptsOnlyBuild:
     UnityEngine.UI.dll:
     - UnityEngine.UI.Button
     - UnityEngine.UI.CanvasScaler
+    - UnityEngine.UI.ContentSizeFitter
     - UnityEngine.UI.GraphicRaycaster
-    - UnityEngine.UI.GridLayoutGroup
     - UnityEngine.UI.HorizontalLayoutGroup
     - UnityEngine.UI.Image
-    - UnityEngine.UI.InputField
-    - UnityEngine.UI.LayoutElement
-    - UnityEngine.UI.Mask
+    - UnityEngine.UI.RectMask2D
     - UnityEngine.UI.ScrollRect
-    - UnityEngine.UI.Scrollbar
     - UnityEngine.UI.Shadow
     - UnityEngine.UI.Slider
     - UnityEngine.UI.Text
@@ -101,21 +101,23 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12198}
     - Class: 114
-      Script: {instanceID: 12382}
+      Script: {instanceID: 12200}
     - Class: 114
-      Script: {instanceID: 12706}
+      Script: {instanceID: 12384}
     - Class: 114
-      Script: {instanceID: 12952}
+      Script: {instanceID: 12708}
     - Class: 114
-      Script: {instanceID: 13014}
+      Script: {instanceID: 12954}
     - Class: 114
-      Script: {instanceID: 13522}
+      Script: {instanceID: 13016}
     - Class: 114
-      Script: {instanceID: 13554}
+      Script: {instanceID: 13518}
     - Class: 114
-      Script: {instanceID: 15664}
+      Script: {instanceID: 13526}
     - Class: 114
-      Script: {instanceID: 15754}
+      Script: {instanceID: 13558}
+    - Class: 114
+      Script: {instanceID: 16356}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -192,63 +194,63 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11374}
     - Class: 114
-      Script: {instanceID: 11412}
+      Script: {instanceID: 11476}
     - Class: 114
-      Script: {instanceID: 11516}
+      Script: {instanceID: 11570}
     - Class: 114
-      Script: {instanceID: 11598}
-    - Class: 114
-      Script: {instanceID: 11826}
+      Script: {instanceID: 11708}
     - Class: 114
       Script: {instanceID: 11976}
     - Class: 114
       Script: {instanceID: 12020}
     - Class: 114
-      Script: {instanceID: 12230}
+      Script: {instanceID: 12232}
     - Class: 114
-      Script: {instanceID: 12294}
+      Script: {instanceID: 12296}
     - Class: 114
-      Script: {instanceID: 12488}
+      Script: {instanceID: 12490}
     - Class: 114
-      Script: {instanceID: 12532}
+      Script: {instanceID: 12554}
     - Class: 114
-      Script: {instanceID: 12552}
+      Script: {instanceID: 12568}
     - Class: 114
-      Script: {instanceID: 12566}
+      Script: {instanceID: 12650}
     - Class: 114
-      Script: {instanceID: 12648}
+      Script: {instanceID: 12662}
     - Class: 114
-      Script: {instanceID: 12660}
+      Script: {instanceID: 12704}
     - Class: 114
-      Script: {instanceID: 12672}
+      Script: {instanceID: 12708}
     - Class: 114
-      Script: {instanceID: 12702}
+      Script: {instanceID: 12724}
     - Class: 114
-      Script: {instanceID: 12706}
+      Script: {instanceID: 12874}
     - Class: 114
-      Script: {instanceID: 12722}
+      Script: {instanceID: 12892}
     - Class: 114
-      Script: {instanceID: 12808}
+      Script: {instanceID: 12900}
     - Class: 114
-      Script: {instanceID: 12872}
+      Script: {instanceID: 12954}
     - Class: 114
-      Script: {instanceID: 12890}
+      Script: {instanceID: 13016}
     - Class: 114
-      Script: {instanceID: 12898}
+      Script: {instanceID: 13204}
     - Class: 114
-      Script: {instanceID: 13014}
+      Script: {instanceID: 13228}
     - Class: 114
-      Script: {instanceID: 13202}
+      Script: {instanceID: 13378}
     - Class: 114
-      Script: {instanceID: 13226}
+      Script: {instanceID: 13426}
     - Class: 114
-      Script: {instanceID: 13376}
+      Script: {instanceID: 13496}
     - Class: 114
-      Script: {instanceID: 13418}
+      Script: {instanceID: 16356}
     - Class: 114
-      Script: {instanceID: 13424}
+      Script: {instanceID: 28386}
     - Class: 114
-      Script: {instanceID: 13494}
+      Script: {instanceID: 43174}
+    - Class: 114
+      Script: {instanceID: 51940}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -902,6 +904,12 @@ ScriptsOnlyBuild:
     className: CloudRegionProperty
   - hash:
       serializedVersion: 2
+      Hash: d59eadc7b5c78423bb31031c5231253f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: PlayersController
+  - hash:
+      serializedVersion: 2
       Hash: ee84478990d29c6d64a8d3003b44725c
     assemblyName: PhotonUnityNetworking.Demos.dll
     namespaceName: Photon.Pun.Demo.Asteroids
@@ -1418,7 +1426,7 @@ ScriptsOnlyBuild:
     className: TMP_StyleSheet
   - hash:
       serializedVersion: 2
-      Hash: bf3c25cd75facbc3f0058cfceb6ed5c5
+      Hash: 3ffd737f5e193b4e67d1528399519d19
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PhotonManager
@@ -1640,6 +1648,12 @@ ScriptsOnlyBuild:
     className: BoolInputField
   - hash:
       serializedVersion: 2
+      Hash: 132de608613e06915f9b009fdd59a152
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: PlayerInGame
+  - hash:
+      serializedVersion: 2
       Hash: 0fd6822f6177297bd0eb4d83cc7a9030
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
@@ -1682,16 +1696,34 @@ ScriptsOnlyBuild:
     className: Option
   - hash:
       serializedVersion: 2
-      Hash: d59eadc7b5c78423bb31031c5231253f
-    assemblyName: Assembly-CSharp.dll
+      Hash: bed12c6c9c8ba54a1d22ede84873eec9
+    assemblyName: Nobi.UiRoundedCorners.dll
     namespaceName: 
-    className: PlayersController
+    className: ImageWithIndependentRoundedCorners
   - hash:
       serializedVersion: 2
-      Hash: 132de608613e06915f9b009fdd59a152
+      Hash: c525b65e922978828d6cfe06104e263b
+    assemblyName: Nobi.UiRoundedCorners.dll
+    namespaceName: 
+    className: ImageWithRoundedCorners
+  - hash:
+      serializedVersion: 2
+      Hash: a2c0e58df13d9ae788eeb80efa79dc7a
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
-    className: PlayerInGame
+    className: LobbyBreadcrumbsController
+  - hash:
+      serializedVersion: 2
+      Hash: df3df4859f6f29593258f1966efad3d7
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: RoomEntryController
+  - hash:
+      serializedVersion: 2
+      Hash: 23d30c727215e92b3765cf520a3b2204
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: PlayerEntryController
   platform: 5
   scenePathNames:
   - Assets/_Scenes/LobbyView.unity

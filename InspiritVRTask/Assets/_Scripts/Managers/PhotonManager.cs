@@ -1,17 +1,21 @@
-﻿using ExitGames.Client.Photon;
+﻿using System;
+using ExitGames.Client.Photon;
 using Photon.Realtime;
 using System.Collections.Generic;
 using Photon.Pun;
-using Photon.Pun.Demo.Asteroids;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class PhotonManager : MonoBehaviourPunCallbacks
  {
      [Header("Login Panel")]
      public GameObject LoginPanel;
 
-     public InputField PlayerNameInput;
+     public CanvasGroup playerNameLabelCanvasGroup;
+     public TextMeshProUGUI playerNameLabelText;
+     public TMP_InputField playerNameInputField;
 
      [Header("Selection Panel")]
      public GameObject SelectionPanel;
@@ -19,8 +23,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
      [Header("Create Room Panel")]
      public GameObject CreateRoomPanel;
 
-     public InputField RoomNameInputField;
-     public InputField MaxPlayersInputField;
+     public TMP_InputField roomNameInputField;
 
      [Header("Room List Panel")]
      public GameObject RoomListPanel;
@@ -33,11 +36,18 @@ public class PhotonManager : MonoBehaviourPunCallbacks
 
      public Button StartGameButton;
      public GameObject PlayerListEntryPrefab;
+     public Transform playerListContent;
 
      private Dictionary<string, RoomInfo> cachedRoomList;
      private Dictionary<string, GameObject> roomListEntries;
      private Dictionary<int, GameObject> playerListEntries;
 
+     #region Private Variables
+
+     private LobbyBreadcrumbsController _lobbyBreadcrumbsController;
+
+     #endregion
+     
      #region UNITY
 
      public void Awake()
@@ -47,7 +57,16 @@ public class PhotonManager : MonoBehaviourPunCallbacks
          cachedRoomList = new Dictionary<string, RoomInfo>();
          roomListEntries = new Dictionary<string, GameObject>();
          
-         PlayerNameInput.text = "Player " + Random.Range(1000, 10000);
+         playerNameInputField.text = "Player " + Random.Range(1000, 10000);
+     }
+
+     public void Start()
+     {
+         // Set the reference to the Controller
+         _lobbyBreadcrumbsController = FindObjectOfType<LobbyBreadcrumbsController>();
+         
+         // Set the character limit to the Input field
+         playerNameInputField.characterLimit = 15;
      }
 
      #endregion
@@ -104,25 +123,24 @@ public class PhotonManager : MonoBehaviourPunCallbacks
 
          foreach (Player p in PhotonNetwork.PlayerList)
          {
-             GameObject entry = Instantiate(PlayerListEntryPrefab);
-             entry.transform.SetParent(InsideRoomPanel.transform);
+             GameObject entry = Instantiate(PlayerListEntryPrefab, playerListContent);
              entry.transform.localScale = Vector3.one;
-             entry.GetComponent<PlayerListEntry>().Initialize(p.ActorNumber, p.NickName);
+             entry.GetComponent<PlayerEntryController>().SetPlayerEntryFields(p.ActorNumber, p.NickName);
 
              object isPlayerReady;
-             if (p.CustomProperties.TryGetValue(AsteroidsGame.PLAYER_READY, out isPlayerReady))
+             if (p.CustomProperties.TryGetValue(InspiritVRQuizGame.PLAYER_READY, out isPlayerReady))
              {
-                 entry.GetComponent<PlayerListEntry>().SetPlayerReady((bool) isPlayerReady);
+                 entry.GetComponent<PlayerEntryController>().SetPlayerReady((bool) isPlayerReady);
              }
 
              playerListEntries.Add(p.ActorNumber, entry);
          }
 
-         StartGameButton.gameObject.SetActive(CheckPlayersReady());
+         StartGameButton.gameObject.SetActive(CheckPlayersReady() );
 
          Hashtable props = new Hashtable
          {
-             {AsteroidsGame.PLAYER_LOADED_LEVEL, false}
+             {InspiritVRQuizGame.PLAYER_LOADED_LEVEL, false}
          };
          PhotonNetwork.LocalPlayer.SetCustomProperties(props);
      }
@@ -142,10 +160,9 @@ public class PhotonManager : MonoBehaviourPunCallbacks
 
      public override void OnPlayerEnteredRoom(Player newPlayer)
      {
-         GameObject entry = Instantiate(PlayerListEntryPrefab);
-         entry.transform.SetParent(InsideRoomPanel.transform);
+         GameObject entry = Instantiate(PlayerListEntryPrefab, playerListContent);
          entry.transform.localScale = Vector3.one;
-         entry.GetComponent<PlayerListEntry>().Initialize(newPlayer.ActorNumber, newPlayer.NickName);
+         entry.GetComponent<PlayerEntryController>().SetPlayerEntryFields(newPlayer.ActorNumber, newPlayer.NickName);
 
          playerListEntries.Add(newPlayer.ActorNumber, entry);
 
@@ -179,9 +196,9 @@ public class PhotonManager : MonoBehaviourPunCallbacks
          if (playerListEntries.TryGetValue(targetPlayer.ActorNumber, out entry))
          {
              object isPlayerReady;
-             if (changedProps.TryGetValue(AsteroidsGame.PLAYER_READY, out isPlayerReady))
+             if (changedProps.TryGetValue(InspiritVRQuizGame.PLAYER_READY, out isPlayerReady))
              {
-                 entry.GetComponent<PlayerListEntry>().SetPlayerReady((bool) isPlayerReady);
+                 entry.GetComponent<PlayerEntryController>().SetPlayerReady((bool) isPlayerReady);
              }
          }
 
@@ -204,16 +221,14 @@ public class PhotonManager : MonoBehaviourPunCallbacks
 
      public void OnCreateRoomButtonClicked()
      {
-         string roomName = RoomNameInputField.text;
+         string roomName = roomNameInputField.text;
          roomName = (roomName.Equals(string.Empty)) ? "Room " + Random.Range(1000, 10000) : roomName;
 
-         byte maxPlayers;
-         byte.TryParse(MaxPlayersInputField.text, out maxPlayers);
-         maxPlayers = (byte) Mathf.Clamp(maxPlayers, 2, 8);
-
-         RoomOptions options = new RoomOptions {MaxPlayers = maxPlayers, PlayerTtl = 10000 };
+         RoomOptions options = new RoomOptions {MaxPlayers = 4, PlayerTtl = 10000 };
 
          PhotonNetwork.CreateRoom(roomName, options, null);
+         
+         _lobbyBreadcrumbsController.ToggleAllPlayersLabel(true);
      }
 
      public void OnLeaveGameButtonClicked()
@@ -223,12 +238,17 @@ public class PhotonManager : MonoBehaviourPunCallbacks
 
      public void OnLoginButtonClicked()
      {
-         string playerName = PlayerNameInput.text;
+         // Set the PlayerName
+         string playerName = playerNameInputField.text;
 
          if (!playerName.Equals(""))
          {
              PhotonNetwork.LocalPlayer.NickName = playerName;
              PhotonNetwork.ConnectUsingSettings();
+             
+             togglePlayerNameLabel(true, playerName);
+             
+             _lobbyBreadcrumbsController.ToggleCreateJoinRoomLabel(true);
          }
          else
          {
@@ -266,7 +286,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
          foreach (Player p in PhotonNetwork.PlayerList)
          {
              object isPlayerReady;
-             if (p.CustomProperties.TryGetValue(AsteroidsGame.PLAYER_READY, out isPlayerReady))
+             if (p.CustomProperties.TryGetValue(InspiritVRQuizGame.PLAYER_READY, out isPlayerReady))
              {
                  if (!(bool) isPlayerReady)
                  {
@@ -279,6 +299,9 @@ public class PhotonManager : MonoBehaviourPunCallbacks
              }
          }
 
+         if (!areMinPlayersAvailable())
+             return false;
+         
          return true;
      }
      
@@ -338,12 +361,34 @@ public class PhotonManager : MonoBehaviourPunCallbacks
      {
          foreach (RoomInfo info in cachedRoomList.Values)
          {
-             GameObject entry = Instantiate(RoomListEntryPrefab);
-             entry.transform.SetParent(RoomListContent.transform);
+             GameObject entry = Instantiate(RoomListEntryPrefab, RoomListContent.transform, true);
              entry.transform.localScale = Vector3.one;
-             entry.GetComponent<RoomListEntry>().Initialize(info.Name, (byte)info.PlayerCount, info.MaxPlayers);
+             entry.GetComponent<RoomEntryController>().SetRoomEntryFields(info.Name, info.PlayerCount, info.MaxPlayers);
 
              roomListEntries.Add(info.Name, entry);
          }
+     }
+
+     /// <summary>
+     /// Which shows/hides the Player Name based on Player's Login Status
+     /// </summary>
+     /// <param name="toggleValue"></param>
+     /// <param name="playerName"></param>
+     private void togglePlayerNameLabel(bool toggleValue, string playerName)
+     {
+         // Set the PlayerName Label
+         playerNameLabelText.text = playerName;
+
+         if (toggleValue)
+             // Show the PlayerName Label
+             playerNameLabelCanvasGroup.alpha = 1;
+         else 
+             // Hide the PlayerName Label
+             playerNameLabelCanvasGroup.alpha = 0;
+     }
+
+     private bool areMinPlayersAvailable()
+     {
+         return PhotonNetwork.PlayerList.Length > 1;
      }
  }
